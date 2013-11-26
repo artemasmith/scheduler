@@ -1,0 +1,23 @@
+= scheduler
+
+This plugin is used to set shedule of duty days. "Duty day" is an saturday or other week day when worker should solve issues. 
+You cam choose wich days of a week wil be duty days. 
+Common user without :admin_change_duty permission can take\decline duty day. After it started, Duty worker fill in report's fields.
+After that manager can view duties report.
+Admin (with :admin_change_duty permission) make set duty workers himself.
+
+Periods added. 
+<b>Warning:</b> period are seted in weeks.
+
+<b> Installation tips </b>
+run 'bundle install' before using. (It fix's complex report button)
+
+<b>Important</b> Before using you need to add permissions to a role (to add new duty days, change them etc)
+
+<b>Mail notifications available!</b> Now you may configure email notifications to duty worker before his duty day. It's a rake task, so you should 
+add it to chrome.
+
+1 0 * * * cd /opt/redmine && rake projects={comma separated list of projects wich avoid to notify, let it empty if you want to notify users of all projects} users={comma separated list of user's ids wich avoid to notify} days={days before duty when start to notify}  redmine:notify_users RAILS_ENV=production
+
+
+If it be needed, I'll make the plugin more flexible.

@@ -1,0 +1,82 @@
+# Russian localization for Ruby on Rails 2.2+
+# by Yaroslav Markin <yaroslav@markin.net>
+#
+# Be sure to check out "russian" gem (http://github.com/yaroslav/russian) for
+# full Russian language support in Rails (month names, pluralization, etc).
+# The following is an excerpt from that gem.
+#
+# Для полноценной поддержки русского языка (варианты названий месяцев,
+# плюрализация и так далее) в Rails 2.2 нужно использовать gem "russian"
+# (http://github.com/yaroslav/russian). Следующие данные -- выдержка их него, чтобы
+# была возможность минимальной локализации приложения на русский язык.
+
+ru:  
+  permission_change_duty: 'Просмотр дежурств'
+  permission_admin_change_duty: 'Администратор дежурств'
+  permission_view_duty: 'Изменять свои отчеты и дни'
+  permission_delete_duty: 'Удалять дежурства'
+  schedule: 'дежурства'
+  duty_schedule: 'Расписание дежурств на'
+  report: 
+    one: 'отчет'
+    other: 'отчеты'
+  project_module_schedule: 'Дежурство'
+  monday: 'понедельник'
+  tuesday: 'вторник'
+  wensday: 'среда'
+  thuesday: 'черверг'
+  friday: 'пятнца'
+  saturday: 'суббота'
+  sunday: 'воскресение'
+  update: 'обновить'
+  on: 'на период'
+  save: "Сохранить"
+  create: 'Новый отчет'
+  get_date: 'Записаться'
+  decline: 'Отменить'
+  user: 'дежурный'
+  client: 'обратившийся'
+  call_time: 'время обращения'
+  handle_time: 'время решения'
+  problem: 'проблема'
+  next_month: 'Следующий месяц'
+  previous_month: 'Предыдущий месяц'
+  current_month: 'Текущий месяц'
+  january: 'Январь'
+  february: 'Февраль'
+  march: 'Март'
+  april: 'Апрель'
+  may: 'Май'
+  june: 'Июнь'
+  july: 'Июль'
+  august: 'Август'
+  september: 'Сентябрь'
+  october: 'Октябрь'
+  november: 'Ноябрь'
+  december: 'Декабрь'
+  complex_report: 'Комплексный отчет'
+  display: 'Показать'
+  from: 'От'
+  to: 'До'
+  day: 'Дата'
+  edit_report: 'Редактировать отчет от'
+  new_report: 'Создать отчет от'
+  issues_for: 'Отчеты за'
+  select_duty: 'Выберите дни дежурств'
+  delete_report: 'Удалить'
+  save: 'Сохранить'
+  next_period: 'Следующий период'
+  current_period: 'Текущий период'
+  old_period: 'Другой период'
+  important: 'Важно!'
+  schedule_period: 'Период дежурств'
+  vac_days: 'Праздничные дни'
+  in_weeks: 'в неделях'
+  for_example: 'нарпимер 2013-05-09'
+  you_should_add_dates_in_format: 'Вы должны добавлять праздники'
+  dd_mm_yyyy: 'ГГГГ-ММ-ДД'
+  where_d_m_y: 'где Д-день М-месяц Г-год'
+  dear_user: 'Уважаемый пользователь'
+  before_your_duty: "До вашего дежурства осталось (дней)"
+  duty_day: 'День дежурства'
+  

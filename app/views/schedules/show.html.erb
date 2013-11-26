@@ -1,0 +1,15 @@
+<%= render 'stylesheet'%>
+<h2><%= t :issues_for %> <%= "#{@sday.day}" %> <%= render_month "#{@sday.month} #{@sday.year}  "%></h2>
+<%= render 'navigation'%>
+<ul class="nav inline">
+<% @day_reports.each do |report| %>
+<li>
+<div class='input-prepend'>
+<span class="add-on">
+<%= button_to t('delete_report'),dutyreport_path(id: report.id,sday: @sday.id,project_id: params[:project_id],user: session[:user_id]),action: :destroy,method: :delete, class: 'btn btn-danger btn-mini'%>
+</span>
+<%= link_to t("report",count: 1)+" " + report.id.to_s, edit_dutyreport_path(id: @sday.id, project_id: params[:project_id],report_id: report.id),class: 'btn'%>
+</div>
+</li>
+<% end %>
+</ul>

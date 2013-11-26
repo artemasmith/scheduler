@@ -1,0 +1,5 @@
+var day="<%= params[:schedule][:day]%>";
+$('#cr-btn-'+day)[0].className='hid';
+$('#del-btn-'+day)[0].className='btn btn-danger';
+$('.'+day).html("<%= escape_javascript(render 'button') %>");
+$('#cell-'+day)[0].className='taken';

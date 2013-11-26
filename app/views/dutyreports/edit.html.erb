@@ -1,0 +1,14 @@
+<%= render 'stylesheet'%>
+
+<h2><%= t :edit_report %> <%= @sday.date.split()[2]%> <%= render_month(@sday.date.split()[1] + " " + @sday.date.split()[0])%></h2>
+
+<%= render 'calendar'%>
+
+<ul class="nav nav-pills">
+<li>
+<%= link_to t('report',count: 2), schedule_path(id: params[:id], project_id: params[:project_id])%>
+</li>
+</ul>
+<br>
+
+<%= render 'addform' %>

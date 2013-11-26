@@ -1,0 +1,40 @@
+<% def wday_to_str(day)%>
+<% res = case day%>
+<% when 0 then t('sunday') %>
+<% when 1 then t('monday') %>
+<% when 2 then t('thuesday') %>
+<% when 3 then t('wensday') %>
+<% when 4 then t('tuesday') %>
+<% when 5 then t('friday') %>
+<% when 6 then t('saturday') %>
+<% end %>
+<% end %>
+
+
+<h3> <%= t :select_duty%> </h3>
+<div style="margin-left:25px;">
+<% d=Date.today.beginning_of_week %>
+
+
+<% 7.times do %>    
+<div class="row">    <%= check_box_tag 'settings[duty][]', d.wday,settings['duty'].include?(d.wday.to_s) %> <%= wday_to_str(d.wday)%> </div> 
+    
+<%    d+=1 %>
+<% end %>
+
+<br>
+<div style="margin-left:185px;">
+<label><%=t :schedule_period %> <%= t 'in_weeks'%> </label> 
+<%= text_field_tag 'settings[period]',settings['period']%>
+</div><br>
+<div style="margin-left:110px;">
+<b><%= t :important %></b><br>
+<%= t 'you_should_add_dates_in_format' %> <%= t 'dd_mm_yyyy' %> <%= t 'where_d_m_y' %>
+<%= t 'for_example' %>
+<br>
+<label><%= t :vac_days%></label><br>
+<%= text_area_tag 'settings[vacation]',settings['vacation']%>
+</div>
+</div>
+
+

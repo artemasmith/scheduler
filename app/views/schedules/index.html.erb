@@ -1,0 +1,95 @@
+
+<% render  partial: "stylesheet"%>
+
+<h1 class="scheduler"> <%= t :duty_schedule %> <%= t render_month_by_id(params[:month])%> <%= params[:year] %> </h1>
+
+<div class="navigation-link">
+<ul class="nav nav-pills">
+<li><%= render_navigation_link('prev',params['year'],params['month'],params["project_id"]) %></li>
+<li><%= link_to t(:current_month), schedules_path(:project_id=>params["project_id"],:year=>Date.today.year.to_s,:month=>Date.today.month.to_s), :class=>'current-month' %></li>
+<li><%= render_navigation_link('next',params['year'],params['month'],params["project_id"]) %></li>
+</ul>
+</div>
+
+<%= render partial: "periods", locals: {period: @period, current_period: @current_period, next_period: @next_period}%>
+
+
+<div class="row-fluid">
+<div class="span9">
+<table class="table table-bordered">
+
+<tr>
+<% @week.each do |day,cls|%>
+
+<th class="<%= cls%> span2 monday"> <%=t day%> </th>
+
+<% end %>
+</tr>
+
+<% @calendar.each do |week|%>
+<tr>
+    <% week.each do |wday,mday|%>
+	<% params[:day]=mday%>
+	<% params[:wday]=wday %>
+	<td id="cell-<%= mday.to_s.split[0]%>" class="<%= render_class({wday: wday,day: mday, year: params[:year], month: params[:month]}) %>"> <div class="<%=mday.to_s.split()[0] if duty_day?(wday) %> "> <%= render_day_link(params) %><br\> </div>
+	<% day1={year: params[:year], month: params[:month], day: mday.to_s.split[0],i: @current_period}%>
+	<% pi=@current_period.to_i + 1 if @current_period.to_i < @period.length-1%>
+	<% day2={year: params[:year], month: params[:month], day: mday.to_s.split[0],i: pi}%>
+	
+	<% if duty_day?(wday) && !mday.blank? && @admin%>
+	    
+		<%= form_for :schedule, url: schedule_path(id: session[:user_id],project_id: params[:project_id]),remote: true,  method: :put do |f| %>
+		    <%= f.hidden_field :day, value: mday.to_s.split()[0] %>
+		    <%= f.hidden_field :month, value: params[:month] %>
+		    <%= f.hidden_field :year, value: params[:year] %>
+		    <%= f.hidden_field :project_id, value: params[:project_id] %>
+		    <%= f.hidden_field :user, value: session[:user_id] %>
+		    <%= f.hidden_field :id, value: session[:user_id] %>
+		    
+	    <div class="row-fluid">    
+		    <div class="span5"><%= f.select :dpeople_id, @pusers %></div> &nbsp;
+	    </div>
+	    <div class="row-fluid">    
+		    <div class="span3"><%=f.submit t("update"), class: 'btn btn-info update' %></div>
+	    </div>	    
+	
+	<% end %>
+	
+	<% @classname=""%>
+	<div class="row-fluid">    
+	    <div class="span12" >
+	    <% if day_taken(params)%>
+		<% @classname='hid' %>
+	    <% else%>
+		<% @classname='btn btn-primary' %>
+	    <% end %>
+	<%=h  button_to t("get_date"), schedules_path(project_id: params[:project_id],year: params[:year],month: params[:month], day: params[:day], user: session[:user_id]),remote: true, action: "create", id: "cr-btn-#{mday.to_s.split()[0]}", class: "#{@classname}" %>
+	    <% if !( day_taken(params) && (@admin ||  session[:user_id]==day_taken(params).id))%>
+		<% @classname='hid' %>
+	    <% else%>
+		<% @classname='btn btn-danger' %>
+	    <% end %>
+	<%= h button_to t("decline"), schedule_path(id: session[:user_id],project_id: params[:project_id],year: params[:year],month: params[:month], day: params[:day], user: session[:user_id]),id: "del-btn-#{mday.to_s.split()[0]}", remote: true, action: "destroy", method: :delete, class: "#{@classname}" %>
+	    </div>
+	</div>    
+	<% end %>
+	
+	</td>
+    <% end%>
+</tr>
+<% end %>
+
+</table>
+</div>
+</div>
+
+<!-- OLD CODE -->
+
+<div class="report-link btn"> <%= link_to t('complex_report'),:controller=>"schedules",:action=>"report", :project_id=>@project, year: params[:year], month: params[:month], class: "btn"%> </div>
+
+
+<%= render 'reports'%>
+
+<%= render 'js' %>
+
+<%= link_to t('pdf_export'), schedules_path(project_id: params[:project_id], format: :pdf)%>

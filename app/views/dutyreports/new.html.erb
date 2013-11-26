@@ -1,0 +1,6 @@
+<%= render 'stylesheet'%>
+
+<h2><%= t :new_report %> <%= @sday.date.split()[2]%> <%= render_month(@sday.date.split()[1] + " " + @sday.date.split()[0])%></h2>
+
+<%= render 'calendar'%>
+<%= render 'addform' %>

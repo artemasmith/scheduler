@@ -1,0 +1,92 @@
+th.cal{
+    border : solid 2px;
+    background-color : palegreen;
+    opacity : 0.8;
+}
+th.one-day {
+    
+}
+
+td{
+border : solid 1px rgb(221, 221, 221);
+}
+td.taken {
+    background-color : springgreen;
+    opacity : 0.7;
+    text-align: center;
+    width: 30%;
+}
+.currentperiod {
+    background-color: #ccffff;
+    opacity: 0.7;
+}
+.nextperiod {
+    font-style: italic;
+    background-color: #ffffcc;
+    opacity: 0.7;
+}
+
+.otherperiod {
+    background-color: #cc9999;
+    opacity: 0.5;
+}
+
+.saturday {
+    background-color : lightpink;
+    opacity : 0.7;
+    color : black;
+}
+.rday {
+    display: block;
+    background-color: red;
+}
+
+.report {
+    display : block;
+    background-color : cornsilk;
+    opacity: 0.8;
+    color: black;
+}
+
+th.duty{
+    border: 2px solid;
+    background-color : aqua;
+    opacity : 0.8;
+    color : black;
+}
+.duty {
+    background-color : lightskyblue;
+    opacity : 0.7;
+    color : black;
+    min-width : 75px;
+}
+
+.hid {
+    display : none;
+}
+
+
+.navigation {
+    width : 30%;
+    position : relative;
+	top: 10%;
+	left : 25%;
+    padding : 20px;
+    margin-bottom: 15px;
+}
+.navlink {
+    padding : 40px;
+}
+#dutyreport_call_time_4i{
+    width: 55px;
+}
+#dutyreport_call_time_5i{
+    width: 55px;
+}
+#dutyreport_handle_time_4i{
+    width: 55px;
+}
+#dutyreport_handle_time_5i{
+    width: 55px;
+}
+

@@ -1,0 +1,16 @@
+<!-- period - array of year periods, current_period, next_period - ids of proper period in that array-->
+<div class="row-fluid">
+<ul class="unstyled">
+<li><span class="currentperiod span2">&nbsp <%= t 'current_period' %><br>
+<%=  render_yday({year: params[:year], yday: period[@current_period][0]}) %> -
+<%=  render_yday({year: params[:year], yday: period[@current_period.to_i][1]}) %></span></li>
+<li><span class="nextperiod span2">&nbsp <%= t 'next_period' %><br>
+<% if @next_period%>
+<%=  render_yday({year: params[:year], yday: period[@next_period][0]}) %> -
+<%=  render_yday({year: params[:year], yday: period[@next_period.to_i][1]}) %>
+<% end %>
+</span></li>
+<li><span class="otherperiod span2">&nbsp <%= t 'old_period' %></span></li>
+</ul>
+</div>
+

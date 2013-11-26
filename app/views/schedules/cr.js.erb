@@ -1,0 +1,23 @@
+var day = "<%=params[:day].to_s.split()[0] %>";
+var cell = $("."+day);
+var content = day +
+"<% if  day_taken(params) && (@admin ||  session[:user_id]==day_taken(params).id)%>" +
+    "<%= button_to 'Decline', schedule_path(id: session[:user_id],project_id: params[:project_id],year: params[:year],month: params[:month], day: params[:day], user: session[:user_id]),id: 'del-btn-'+, action: 'destroy'+params[:day].to_s.split()[0], method: :delete %>"+
+"<% end %>" +
+"<% if @admin %> " +
+    "<%= form_for :schedule,  method: :put do |f| %>" +
+    "<%= f.hidden_field :day, value: mday.to_s.split()[0] %>" +
+    "<%= f.hidden_field :month, value: params[:month] %>" +
+    "<%= f.hidden_field :year, value: params[:year] %>" +
+    "<%= f.hidden_field :project_id, value: params[:project_id] %>" +
+    "<%= f.hidden_field :user, value: session[:user_id] %>" +
+    "<%= f.select @pusers %>" +
+    "<%= f.submit 'Update' %>" +
+    "<% end %>" +
+"<% end %>";
+
+cell.html(content);
+
+$("cr-btn-"+day).remove();
+
+alert("done");

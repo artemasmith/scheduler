@@ -1,0 +1,6 @@
+<% p=params%>
+<% p=params[:schedule] if params[:schedule]%>
+<% user = User.find_by_id(p[:dpeople_id])%>
+<% user ||= User.find_by_id(session[:user_id])%>
+<% p[:day]+= " #{user}"%>
+<%= render_day_link(p)%>

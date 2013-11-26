@@ -1,0 +1,57 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<%= wicked_pdf_stylesheet_link_tag Rails.root.join('plugins','scheduler','assets','stylesheets','schedule-style.css') %>
+<%= wicked_pdf_stylesheet_link_tag Rails.root.join('plugins','scheduler','assets','stylesheets','bootstrap.css') %>
+
+<h1><%= t :complex_report %> <%= t :on %>  <%= t :from %> <%=render_month(params["from"]) +" "+  t(:to) +" " + render_month(params["to"])%></h1>
+
+    <table class="table table-bordered ">
+    <tr>
+	<div class="header-user"><th class="cal"> <%= t :day %></th></div>
+	<div class="header-report"><th class="cal"><%= t :user %> </th></div>
+	<div  class="header-report"><th class="cal"> <%= t :call_time %> </th></div>
+	<div class="header-report"><th class="cal"> <%= t :client %> </th></div>
+	<div class="header-report"><th class="cal"> <%= t :problem %> </th></div>
+	<div class="header-report"><th class="cal"> <%= t :handle_time %> </th></div>
+	<div class="header-report"><th class="cal"> <%= t :report, count: 1 %></th></div>
+    </tr>
+    
+	<% @reports.each do |r| %>
+	
+	    
+	
+	<% if r.dutyreport.count > 0 %>
+	
+	    <%  r.dutyreport.each do |dr|%>
+	    
+	    <tr class="<%= paint_cg(r)%>">
+	    <td class="span2"><%=r.day.to_s + " " +  render_month(r.month.to_s + " " + r.year.to_s).to_s %> </td>
+	    <td class="span1"><%= r.user %> </td>	    
+	    <td class="span1"><%= dr.call_time.to_s.split()[1] %> </td>
+	    <td class="span1"><%= dr.client  %> </td>
+	    <td class="span1"><%= dr.problem  %> </td>
+	    <td class="span1"><%= dr.handle_time.to_s.split()[1]  %> </td>
+	    <td class="span1"><%= dr.report  %> </td>
+	    </tr>
+	    
+	    <% end %>
+	    
+	
+	<% else %>
+	    <tr>
+	    <td class="span2"><%=r.day.to_s + " " +  render_month(r.month.to_s + " " + r.year.to_s).to_s %> </td>
+	    <td class="span1"><%= r.user %> </td>
+	    <% 5.times do %>
+		<td></td>
+	    <% end %>
+	    </tr>
+	<% end%>
+	
+	</tr>
+	<% end %>
+    </table>
+    
+
+<div class="pagination pagination-centered"> <%= will_paginate @reports, params: {project_id: params[:project_id],from: params[:from], to: params[:to]} %> </div>
+
+

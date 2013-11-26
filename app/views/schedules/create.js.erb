@@ -1,0 +1,4 @@
+$('.<%= params[:day].to_s.split()[0] %>').html("<%= escape_javascript(render 'button') %>");
+$('#cr-btn-<%= @sparam[:day].to_s.split()[0] %>')[0].className='hid';
+$('#del-btn-<%= @sparam[:day].to_s.split()[0] %>')[0].className='btn btn-danger';
+$('#cell-<%= @sparam[:day].to_s.split()[0]%>')[0].className='taken';

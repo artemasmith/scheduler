@@ -1,0 +1,10 @@
+<ul>
+<% @duties.each do |duty|%>
+
+    <li id="<%= duty["day"]%>" class="hid">
+    <% duty.dutyreport.each do |report|%>
+	<%= report.problem.to_s + " -  " + report.report.to_s if report %> <br>
+    <% end %>
+    </li>
+<% end %>
+</ul>
