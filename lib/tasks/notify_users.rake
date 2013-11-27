@@ -24,6 +24,53 @@ class DBgetter < ActiveRecord::Base
     return 0 if users.blank?
     return users
   end
+  
+  #array of projects in which to notify
+  def self.get_managers(projects)
+    managers =[]
+    arProjects=[]
+    (projects.blank?) ? arProjects = Project.all : projects.each {|p| arProject << Project.find_by_identifier(p)}
+    arProjects.each do |p|
+	p.members.each do |m|
+	    m.roles.each {|r| managers << m.user.id if r.permissions.include?(:admin_change_duty)}
+	end
+    end
+    managers
+  end
+  
+  #projects - list of project_id separated by comma
+  def self.get_empty_days(projects)
+    empty = []
+    arProjects=[]
+    (projects.blank?) ? arProjects = Project.all : projects.each {|p| arProjects <<  Project.find_by_identifier(p)}
+    
+    wdays=Setting.plugin_scheduler['duty']
+    arProjects.each do |p|
+	today = Date.today
+	endOfWeek = Date.today.end_of_week
+        while today < endOfWeek
+	    if wdays.include?(today.wday.to_s)
+		s=Schedule.where(day: today.mday, month: today.month, year: today.year)
+		empty.push([today, p.identifier]) if s.blank?
+	    end
+	    today+=1
+	end
+    end
+    empty
+  end
+  
+  def self.get_notification_managers(projects)
+    managers = self.get_managers(projects)
+    empty = self.get_empty_days(projects)
+    return false if (managers.blank? || empty.blank?)
+    result={}
+    managers.each do |m|
+	empty.each do |e|
+	    result[m]=[e[0], 'https://' + Socket.gethostname + '/redmine/Schedules?project_id=' + e[1] + '&month=' + e[0].month.to_s + '&year=' + e[0].year.to_s]
+	end
+    end
+    result
+  end
 
 end
 
@@ -67,6 +114,16 @@ task notify_users: :environment do
 	puts "send notifications to #{users.keys}"
     	Dutymailer.send_notification(users)
     end
+    
+    #managers notification area
+    managers = DBgetter.get_notification_managers(options[:project_id])
+    if !managers.blank? 
+	puts "send manager notification #{managers}"
+	Dutymailer.send_notification(managers)
+    else
+	puts "no managers to notify #{managers}"
+    end
+    
 end
 
 

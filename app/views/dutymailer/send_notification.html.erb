@@ -5,7 +5,11 @@
 <body>
 <h1><%= t :dear_user %> <%= @user.name %> </h1>
 <br>
+<% if @days.to_s.length > 3%>
+<%= t :day_without_duty %> <%= @days.to_s%>
+<% else%>
 <%= t :before_your_duty%> <%= @days%>
+<% end%>
 <br>
 <%= @link%>
 </body>

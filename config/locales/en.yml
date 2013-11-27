@@ -60,4 +60,5 @@ en:
   dear_user: 'Dear User'
   before_your_duty: "You will have duty in (days)"
   duty_day: 'Duty day'
+  day_without_duty: 'Day without duty'
 

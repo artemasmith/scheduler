@@ -2,7 +2,7 @@ Redmine::Plugin.register :scheduler do
   name 'Scheduler plugin'
   author 'Artem Kuznetsov'
   description 'This is a scheduler plugin for Redmine. It is needed for scheduling daily duty among staff'
-  version '0.1.9'
+  version '0.1.9.2'
   url 'http://github.com/artemasmith/scheduler'
   author_url 'http://www.github.com/artemasmith'
   

@@ -19,5 +19,6 @@ add it to chrome.
 
 1 0 * * * cd /opt/redmine && rake projects={comma separated list of projects wich avoid to notify, let it empty if you want to notify users of all projects} users={comma separated list of user's ids wich avoid to notify} days={days before duty when start to notify}  redmine:notify_users RAILS_ENV=production
 
+Now schedule managers will be notified too if there no duty person at the current week.
 
 If it be needed, I'll make the plugin more flexible.
