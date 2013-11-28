@@ -18,7 +18,7 @@ class DBgetter < ActiveRecord::Base
         next if nusers && nusers.include?(s.dpeople_id.to_i)
         deltaday=(Date.new(s.year.to_i,s.month.to_i,s.day.to_i) - today).to_i
         if  deltaday > 0 and deltaday < dday
-            users[s.dpeople_id]=[deltaday.to_s, 'https://' + Socket.gethostname + '/redmine/Schedules?project_id=' + s.project_id + '&month=' + s.month.to_s + '&year=' + s.year.to_s]
+            users[s.dpeople_id]=[deltaday.to_s, 'https://' + Socket.gethostname + '/redmine/schedules?project_id=' + s.project_id + '&month=' + s.month.to_s + '&year=' + s.year.to_s]
         end
     end
     return 0 if users.blank?
@@ -66,7 +66,7 @@ class DBgetter < ActiveRecord::Base
     result={}
     managers.each do |m|
 	empty.each do |e|
-	    result[m]=[e[0], 'https://' + Socket.gethostname + '/redmine/Schedules?project_id=' + e[1] + '&month=' + e[0].month.to_s + '&year=' + e[0].year.to_s]
+	    result[m]=[e[0], 'https://' + Socket.gethostname + '/redmine/schedules?project_id=' + e[1] + '&month=' + e[0].month.to_s + '&year=' + e[0].year.to_s]
 	end
     end
     result
