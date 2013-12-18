@@ -1,3 +1,3 @@
 module DutyreportsHelper
-include SchedulesHelper
+  include SchedulesHelper
 end
