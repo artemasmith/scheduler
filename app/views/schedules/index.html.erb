@@ -25,7 +25,6 @@
 
 <% end %>
 </tr>
-
 <% @calendar.each do |week|%>
 <tr>
     <% week.each do |wday,mday|%>
@@ -36,8 +35,7 @@
 	<% pi=@current_period.to_i + 1 if @current_period.to_i < @period.length-1%>
 	<% day2={year: params[:year], month: params[:month], day: mday.to_s.split[0],i: pi}%>
 	
-	<% if duty_day?(wday) && !mday.blank?%>
-	    
+	<% if duty_day?(wday) && !mday.blank? && !vac_day?(year: params[:year], month: params[:month], day: mday.to_s.split[0])%>	
 	  <% if @admin %>
 	   <%= form_for :schedule, url: schedule_path(id: session[:user_id],project_id: params[:project_id]),remote: true,  method: :put do |f| %>
 	    <%= f.hidden_field :day, value: mday.to_s.split()[0] %>

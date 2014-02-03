@@ -161,7 +161,7 @@ def vac_day?(day)
   return false if day[:day].blank?
   cday=Date.new(day[:year].to_i, day[:month].to_i, day[:day].to_i).to_s
   if !Setting.plugin_scheduler['vacation'].blank?
-    return Setting.plugin_scheduler['vacation'].match("#{cday}")
+    return true if Setting.plugin_scheduler['vacation'].match("#{cday}")
   else
     return false
   end
